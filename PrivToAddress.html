@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+function validateForm() {
+    var priv = document.getElementById("priv").value;
+    var patt = /^[0-9a-fA-F]{64}$/;
+    if (patt.test(priv)) {
+        myFunction(priv);
+    } else {
+    window.location.reload(false);
+    alert("Private key should be exactly 64 chars from {0-9, a-f, A-F} set");
+    return false;
+    }
+}
+
+function myFunction(priv) {
+    //document.getElementById("address").innerHTML = "Paragraph changed.";
+    //const ethereumjs = require("ethereumjs-util");
+    //var priv = "000000000000000000000000000000000000000000000000000000000000fffF"
+
+    //priv = '0x' + priv;
+    //priv = new Buffer(priv.slice(2), 'hex');
+    //console.log(bufferToHex(priv));
+    
+    var addr = EthJS.Util.bufferToHex(EthJS.Util.privateToAddress(EthJS.Util.intToBuffer(priv)));
+    document.getElementById("address").innerHTML = addr;
+}
+</script>
+</head>
+
+<body>
+
+<form id="form">
+	Ethereum private key (64 hex chars):<br>
+	<input id="priv" type="password" name="priv" value="" maxlength=64 size=64>
+	<br><br>
+	<input type="button" value="get address" onclick="validateForm()">
+</form>
+
+<p id="address"></p>
+
+
+<script type="text/javascript" src="ethereumjs-tx.js"></script>
+</body>
+</html>
