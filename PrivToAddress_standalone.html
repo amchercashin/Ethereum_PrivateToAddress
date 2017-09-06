@@ -24,7 +24,7 @@ function myFunction(priv) {
     //priv = new Buffer(priv.slice(2), 'hex');
     //console.log(bufferToHex(priv));
     
-    var addr = EthJS.Util.bufferToHex(EthJS.Util.privateToAddress(EthJS.Util.intToBuffer(priv)));
+    var addr = EthJS.Util.bufferToHex(EthJS.Util.privateToAddress(EthJS.Util.toBuffer(EthJS.Util.addHexPrefix(priv))));
     document.getElementById("address").innerHTML = addr;
 }
 </script>
